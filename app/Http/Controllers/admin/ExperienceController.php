@@ -7,6 +7,7 @@ use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ExperienceController extends Controller
@@ -120,8 +121,8 @@ class ExperienceController extends Controller
             'country' => 'required',
             //'city' => ['required',Rule::exists('classrooms', 'id')],
             'startDate' => 'required|date',
-            'endDate' => 'after:startDate',
-            'companyName' => 'required|max:100',
+            'endDate' => 'after:startDate|before:today',
+            'companyName' => 'required|max:150',
         ]);
         try {
             DB::transaction(function () use ($request, $id){

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Education;
+use App\Models\Experience;
 use App\Models\Section;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()->create();
         Education::factory()->make();
+        Experience::factory()->make();
         // \App\Models\User::factory(10)->create();
 
 //         \App\Models\User::factory()->create([
