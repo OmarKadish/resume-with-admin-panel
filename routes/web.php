@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\EducationController;
 use App\Http\Controllers\admin\ExperienceController;
+use App\Http\Controllers\admin\SkillController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,14 @@ Route::prefix('admin')->group(function () {
         Route::get('edit/{id}', [EducationController::class, 'edit']);
         Route::post('update/{id}', [EducationController::class, 'update']);
         Route::delete('delete/{id}', [EducationController::class, 'destroy']);
+    });
+    Route::prefix('skill')->group(function () {
+        Route::get('', [SkillController::class, 'index']);
+        Route::get('create', [SkillController::class, 'create']);
+        Route::post('store', [SkillController::class, 'store']);
+        Route::get('edit/{id}', [SkillController::class, 'edit']);
+        Route::post('update/{id}', [SkillController::class, 'update']);
+        Route::delete('delete/{id}', [SkillController::class, 'destroy']);
     });
 });
 

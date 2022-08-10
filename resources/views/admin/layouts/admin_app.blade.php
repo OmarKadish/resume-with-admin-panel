@@ -10,14 +10,13 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="{{asset('admin/vendors/feather/feather.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/vendors/ti-icons/css/themify-icons.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icon@0.1.0/css/feather.css">
     <link rel="stylesheet" href="{{asset('admin/vendors/css/vendor.bundle.base.css')}}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="{{asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/vendors/ti-icons/css/themify-icons.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/js/select.dataTables.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/3.2.2/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="{{asset('admin/css/style.css')}}">
@@ -166,6 +165,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/admin/skill">
+                        <i class="icon-grid menu-icon"></i>
+                        <span class="menu-title">Skill Section</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false"
                        aria-controls="charts">
                         <i class="icon-bar-graph menu-icon"></i>
@@ -251,8 +256,8 @@
             <!-- partial:partials/_footer.html -->
             <footer class="footer">
                 <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date("Y") }}  Premium <a
-                            href="https://www.linkedin.com/in/omar-kadish" target="_blank">Omar KADISH</a>. All rights reserved.</span>
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date("Y") }}  <a
+                            href="https://www.linkedin.com/in/omar-kadish" target="_blank">Omar KADISH</a>.</span>
                 </div>
             </footer>
             <!-- partial -->
@@ -264,13 +269,14 @@
 <!-- container-scroller -->
 
 <!-- plugins:js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="{{asset('admin/vendors/js/vendor.bundle.base.js')}}"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
-<script src="{{asset('admin/vendors/chart.js/Chart.min.js')}}"></script>
-<script src="{{asset('admin/vendors/datatables.net/jquery.dataTables.js')}}"></script>
-<script src="{{asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
-<script src="{{asset('admin/js/dataTables.select.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/3.2.2/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-select/1.4.0/dataTables.select.min.js"></script>
 
 <!-- End plugin js for this page -->
 <!-- inject:js -->
