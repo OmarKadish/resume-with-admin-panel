@@ -50,9 +50,7 @@ Route::prefix('admin')->group(function () {
     });
     Route::prefix('skill')->group(function () {
         Route::get('', [SkillController::class, 'index']);
-        Route::get('create', [SkillController::class, 'create']);
         Route::post('store', [SkillController::class, 'store']);
-        Route::get('edit/{id}', [SkillController::class, 'edit']);
         Route::post('update/{id}', [SkillController::class, 'update']);
         Route::delete('delete/{id}', [SkillController::class, 'destroy']);
     });

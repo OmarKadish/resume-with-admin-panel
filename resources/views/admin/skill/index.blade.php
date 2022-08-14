@@ -1,8 +1,5 @@
 @extends('admin.layouts.admin_app')
-@php
-    $arr = array("btn-primary", "btn-danger", "btn-secondary", "btn-warning", "btn-light", "btn-success", "btn-info", "btn-dark");
 
-@endphp
 @section('content')
     <div class="row">
         <div class="col-md-6 grid-margin stretch-card">
@@ -48,7 +45,7 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Add new</h4>
+                    <h4 id="formTitle" class="card-title">Add new</h4>
                     <form class="forms-sample" name="skillForm" action="/admin/skill/store"
                           method="POST" enctype="multipart/form-data" autocomplete="on">
                         @csrf
@@ -99,7 +96,9 @@
             </div>
         </div>
     </div>
-    {{--    <div class="row">
+    {{--
+    Another way to show the skill list as a table.
+    <div class="row">
             <div class="col-lg-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
@@ -123,13 +122,9 @@
                                         <td><label class="badge {{isset($skill->isShown)? 'badge-info' : 'badge-danger'}}">Pending</label></td>
                                         <td>
                                             <div class="btn-group">
-                                                <form action="/admin/skill/edit/{{ $skill->id }}"
-                                                      method="get">
-                                                    @csrf
-                                                    <button type="submit"
+                                                    <button type="submit" onclick='fillBoxes(encodeURIComponent(JSON.stringify({{$skill}})))'
                                                             class="btn btn-dark ti-pencil-alt btn-icon">
                                                     </button>
-                                                </form>
                                                 <form action="/admin/skill/delete/{{ $skill->id }}"
                                                       method="post">
                                                     @method('DELETE')
@@ -155,6 +150,7 @@
         //turn form into add form on reset.
         document.skillForm.addEventListener('reset', () => {
             document.querySelector('#submitBtn').innerText = "Add";
+            document.querySelector('#formTitle').innerText = "Add new";
             document.skillForm.action = "/admin/skill/store";
         });
 
@@ -165,10 +161,12 @@
             $('#description').val(curr.description);
             document.getElementById('isShown').value = curr.isShown;
             document.querySelector('#submitBtn').innerText = "Update";
+            document.querySelector('#formTitle').innerText = "Update skill";
             document.skillForm.action = "/admin/skill/update/" + curr.id;
         }
 
 
+/*        Todo: update the skill table on adding or editing.
         function editskill($s) {
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
@@ -176,12 +174,7 @@
                     document.getElementById("").innerHTML = this.responseText;
                 }
             }
-        }
+        }*/
 
-        $(document).ready(function () {
-
-            $("editbtn").click(function () {
-            });
-        })
     </script>
 @endsection

@@ -44,6 +44,7 @@
                             </div>
                         </div>
                     </div>
+{{--                    Todo: use an Api to provide countries and cities.--}}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
@@ -88,6 +89,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{--Todo: use an Api to provide departments.--}}
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Department</label>
