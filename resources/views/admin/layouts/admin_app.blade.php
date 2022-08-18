@@ -18,6 +18,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.9.96/css/materialdesignicons.min.css">
     <!-- End plugin css for this page -->
+    <!-- plugins:js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{asset('admin/vendors/js/vendor.bundle.base.js')}}"></script>
+    <!-- endinject -->
     <!-- inject:css -->
     <link rel="stylesheet" href="{{asset('admin/css/style.css')}}">
     <!-- endinject -->
@@ -89,10 +93,10 @@
                 </li>--}}
                 <li class="nav-item nav-profile dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                        <img src="images/faces/face28.jpg"/>{{ Auth::user()->firstName }}
+                        <img src='{{ url('/images/'.Auth::user()->photo_path) }}'/> {{ Auth::user()->firstName }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item">
+                        <a class="dropdown-item" href="/admin/profile">
                             <i class="ti-settings text-primary"></i>
                             Profile
                         </a>
@@ -194,17 +198,24 @@
 </div>
 <!-- container-scroller -->
 
-<!-- plugins:js -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="{{asset('admin/vendors/js/vendor.bundle.base.js')}}"></script>
-<!-- endinject -->
-<!-- Plugin js for this page -->
+<!-- Plugin js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/3.2.2/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-select/1.4.0/dataTables.select.min.js"></script>
 
-<!-- End plugin js for this page -->
+<!-- End plugin js-->
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#myTextarea',
+        height: 300,
+        plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks' +
+            ' visualchars fullscreen image link media template codesample table charmap ' +
+            'hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+    })
+</script>
+<!---->
 <!-- inject:js -->
 <script src="{{asset('admin/js/off-canvas.js')}}"></script>
 <script src="{{asset('admin/js/hoverable-collapse.js')}}"></script>
@@ -214,6 +225,7 @@
 <!-- endinject -->
 <!-- Custom js for this page-->
 <script src="{{asset('admin/js/dashboard.js')}}"></script>
+<script src="{{asset('admin/js/file-upload.js')}}"></script>
 <script src="{{asset('admin/js/Chart.roundedBarCharts.js')}}"></script>
 <!-- End custom js for this page-->
 </body>

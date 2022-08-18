@@ -31,6 +31,8 @@ Auth::routes();
 Route::prefix('admin')->group(function () {
     Route::get('/', [App\Http\Controllers\admin\AdminController::class, 'index']);
     Route::get('index', [App\Http\Controllers\admin\AdminController::class, 'index']);
+    Route::get('profile', [App\Http\Controllers\admin\AdminController::class, 'profile']);
+    Route::post('profile/update/{id}', [App\Http\Controllers\admin\AdminController::class, 'updateProfile']);
 
     Route::prefix('experience')->group(function () {
         Route::get('', [ExperienceController::class, 'index']);
