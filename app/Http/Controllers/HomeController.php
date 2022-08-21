@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Education;
+use App\Models\Experience;
+use App\Models\Section;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Show the application dashboard.
      *
@@ -23,6 +18,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = User::with('activeSkills')->first();
+        $experiences = Experience::with('section')->whereHas('section', function ($e) use ($user) {
+            return $e->where('user_id',  $user->id);
+        })->orderByDesc('created_at')->get();
+        $education = Education::with('section')->whereHas('section', function ($e) use ($user) {
+            return $e->where('user_id',  $user->id);
+        })->orderByDesc('created_at')->get();
+        return view('home', compact('user', 'experiences', 'education'));
     }
 }

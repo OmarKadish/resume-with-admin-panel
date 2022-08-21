@@ -19,11 +19,11 @@ class EducationFactory extends Factory
     public function definition()
     {
         $edus = [];
-        for ($i = 1; $i < 6; $i++) {
+        for ($i = 1; $i < 4; $i++) {
             Section::insert([
                 'id' => $i,
                 'title' => $this->faker->title(),
-                'details' => $this->faker->title(),
+                'details' => $this->faker->realText(),
                 'country' => $this->faker->country(),
                 'city' => $this->faker->city(),
                 'startDate' => $this->faker->dateTime(),

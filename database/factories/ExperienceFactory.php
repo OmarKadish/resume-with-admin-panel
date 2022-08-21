@@ -23,7 +23,7 @@ class ExperienceFactory extends Factory
             Section::insert([
                 'id' => $i,
                 'title' => $this->faker->title(),
-                'details' => $this->faker->title(),
+                'details' => $this->faker->realText(),
                 'country' => $this->faker->country(),
                 'city' => $this->faker->city(),
                 'startDate' => $this->faker->dateTime(),

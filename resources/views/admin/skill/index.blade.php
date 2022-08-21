@@ -6,9 +6,6 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Skills</h4>
-                    {{--
-                                        <a class="btn btn-outline-primary" href="/admin/skill/create">Add new Skill</a>
-                    --}}
                     <p class="card-description">
                         Skills in Blue are shown in the resume.
                     </p>
@@ -16,7 +13,8 @@
                         <div class="btn-group" style="display: grid; grid-template-columns: repeat(auto-fill,250px);">
                             @foreach($skills as $skill)
                                 <div class="dropdown" style="padding: 10px; display: grid;">
-                                    <button class="btn {{$skill->isShown? 'btn-info': 'btn-secondary'}} dropdown-toggle" type="button"
+                                    <button class="btn {{$skill->isShown? 'btn-info': 'btn-secondary'}} dropdown-toggle"
+                                            type="button"
                                             id="dropdownMenuSizeButton2" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
                                         {{$skill->name}}
@@ -97,54 +95,56 @@
         </div>
     </div>
 
-   {{-- Another way to show the skill list as a table.--}}
-    <div class="row">
-            <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Skills Table</h4>
-                        <a class="btn btn-outline-primary" href="/admin/skill/create">Add new Skill</a>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
+    {{-- Another way to show the skill list as a table.--}}
+    {{--<div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Skills Table</h4>
+                    <a class="btn btn-outline-primary" href="/admin/skill/create">Add new Skill</a>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($skills as $skill)
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Status</th>
-                                    <th></th>
+                                    <td>{{$skill->name}}</td>
+                                    <td>{{$skill->description}}</td>
+                                    <td><label class="badge {{isset($skill->isShown)? 'badge-info' : 'badge-danger'}}">Pending</label>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="submit"
+                                                    onclick='fillBoxes(encodeURIComponent(JSON.stringify({{$skill}})))'
+                                                    class="btn btn-dark ti-pencil-alt btn-icon">
+                                            </button>
+                                            <form action="/admin/skill/delete/{{ $skill->id }}"
+                                                  method="post">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button
+                                                    onclick="return confirm('Are you sure You want to delete this?')"
+                                                    type="submit" class="btn btn-danger ti-trash btn-icon">
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($skills as $skill)
-                                    <tr>
-                                        <td>{{$skill->name}}</td>
-                                        <td>{{$skill->description}}</td>
-                                        <td><label class="badge {{isset($skill->isShown)? 'badge-info' : 'badge-danger'}}">Pending</label></td>
-                                        <td>
-                                            <div class="btn-group">
-                                                    <button type="submit" onclick='fillBoxes(encodeURIComponent(JSON.stringify({{$skill}})))'
-                                                            class="btn btn-dark ti-pencil-alt btn-icon">
-                                                    </button>
-                                                <form action="/admin/skill/delete/{{ $skill->id }}"
-                                                      method="post">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button
-                                                        onclick="return confirm('Are you sure You want to delete this?')"
-                                                        type="submit" class="btn btn-danger ti-trash btn-icon">
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>--}}
     <script>
         //toggle between add and update.
         //turn form into add form on reset.
@@ -166,15 +166,15 @@
         }
 
 
-/*        Todo: update the skill table on adding or editing.
-        function editskill($s) {
-            const xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    document.getElementById("").innerHTML = this.responseText;
-                }
-            }
-        }*/
+        /*        Todo: update the skill table on adding or editing.
+                function editskill($s) {
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState === 4 && this.status === 200) {
+                            document.getElementById("").innerHTML = this.responseText;
+                        }
+                    }
+                }*/
 
     </script>
 @endsection

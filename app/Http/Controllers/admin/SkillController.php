@@ -56,17 +56,11 @@ class SkillController extends Controller
         try {
             // Safely perform set of DB related queries if fail rollback all.
             DB::transaction(function () use ($request){
-                $skill = new Skill();
-                $skill->name = $request->name;
-                $skill->description = $request->description;
-                $skill->isShown = isset($request->isShown)? $request->isShown: 0;
-                $skill->user_id = Auth::user()->id;
-                $skill->save();
+                Skill::create($request->all());
             });
         } catch (\Exception $exception){
             // Back to form with errors
-            return redirect('/admin/skill/create')
-                ->withInput()
+            return redirect('/admin/skill')
                 ->withErrors($exception->getMessage());
         }
         return redirect('/admin/skill')-> with('success', 'A new skill had been added Successfully.');
@@ -110,6 +104,7 @@ class SkillController extends Controller
         try {
             // Safely perform set of DB related queries if fail rollback all.
             DB::transaction(function () use ($request, $id){
+
                 $skill = Skill::findOrFail($id);
                 $skill->name = $request->name;
                 $skill->description = $request->description;
@@ -119,10 +114,9 @@ class SkillController extends Controller
         } catch (\Exception $exception){
             // Back to form with errors
             return redirect('/admin/skill')
-                ->withInput()
                 ->withErrors($exception->getMessage());
         }
-        return redirect('/admin/skill')-> with('success', 'A new skill had been added Successfully.');
+        return redirect('/admin/skill')->with('success', 'A new skill had been added Successfully.');
     }
 
     /**

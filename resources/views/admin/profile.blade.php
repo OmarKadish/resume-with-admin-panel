@@ -74,7 +74,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Phone Number</label>
                                 <div class="col-sm-9">
-                                    <input type="tel" name="phone_number"
+                                    <input type="tel" name="phone_number" placeholder="1-555-555-5555"
                                            value="{{$user->phone_number}}"
                                            class="form-control"/>
                                     @if ($errors->has('phone_number'))

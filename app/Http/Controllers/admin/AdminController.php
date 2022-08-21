@@ -98,7 +98,7 @@ class AdminController extends Controller
         $this->validate($request, [
             'firstName' => 'required|max:30',
             'lastName' => 'required|max:30',
-            'phone_number' => 'regex:/(0)[0-9]{10}/',
+            'phone_number' => 'regex:/(\d+-)?\d{3}-\d{3}-\d{4}$/',
 //            'address' => 'required|max:200',
 //            'summery' => 'after:startDate',
             'linkedin' => 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',

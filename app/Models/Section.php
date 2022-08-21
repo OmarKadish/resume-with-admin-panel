@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Education;
 
 class Section extends Model
 {
@@ -24,6 +25,14 @@ class Section extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class);
+    }
+    public function education()
+    {
+        return $this->hasMany(Education::class);
     }
 
 }
