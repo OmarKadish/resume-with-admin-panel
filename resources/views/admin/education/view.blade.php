@@ -44,19 +44,14 @@
                             </div>
                         </div>
                     </div>
-{{--                    Todo: use an Api to provide countries and cities.--}}
+                    {{--                    Todo: use an Api to provide countries and cities.--}}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Country</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" name="country">
-                                        <option value="Syria">Syria</option>
-                                        <option value="Turkey">Turkey</option>
-                                        <option value="Canada">Canada</option>
-                                        <option value="America">America</option>
-                                        <option value="Italy">Italy</option>
-                                        <option value="Britain">Britain</option>
+                                    <select class="js-example-basic-single w-100" name="country" id="country">
+                                        {{--                                    <select class="form-control" name="country" id="country">--}}
                                     </select>
                                 </div>
                             </div>
@@ -65,11 +60,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">City</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" name="city">
-                                        <option value="Damascus">Damascus</option>
-                                        <option value="Ankara">Ankara</option>
-                                        <option value="Berlin">Berlin</option>
-                                        <option value="Toronto">Toronto</option>
+                                    <select class="js-example-basic-single w-100" name="city" id="city">
                                     </select>
                                 </div>
                             </div>
@@ -144,7 +135,8 @@
                                 <label class="col-sm-3 col-form-label">Details</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="details"
-                                           value="{{isset($education)? $education->section->details : old('details')}}" class="form-control"/>
+                                           value="{{isset($education)? $education->section->details : old('details')}}"
+                                           class="form-control"/>
                                     @if ($errors->has('details'))
                                         <div class="alert alert-danger">
                                             <li>{{ $errors->first('details') }}</li>
@@ -158,7 +150,8 @@
                                 <label class="col-sm-3 col-form-label">GPA</label>
                                 <div class="col-sm-9">
                                     <input type="decimal" name="gpa"
-                                           value="{{isset($education)? $education->gpa : old('gpa')}}" class="form-control"/>
+                                           value="{{isset($education)? $education->gpa : old('gpa')}}"
+                                           class="form-control"/>
                                     @if ($errors->has('gpa'))
                                         <div class="alert alert-danger">
                                             <li>{{ $errors->first('gpa') }}</li>
@@ -203,10 +196,11 @@
     </div>
     <script>
 
-        function check(){
-            var element =document.getElementById('endDate');
+        function check() {
+            var element = document.getElementById('endDate');
             element.disabled = document.getElementById('activeCheckBox').checked;
-            element.value=null;
+            element.value = null;
         }
     </script>
+
 @endsection

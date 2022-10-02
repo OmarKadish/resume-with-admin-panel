@@ -47,13 +47,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Country</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" name="country">
-                                        <option value="Syria">Syria</option>
-                                        <option value="Turkey">Turkey</option>
-                                        <option value="Canada">Canada</option>
-                                        <option value="America">America</option>
-                                        <option value="Italy">Italy</option>
-                                        <option value="Britain">Britain</option>
+                                    <select class="js-example-basic-single w-100" name="country" id="country">
                                     </select>
                                 </div>
                             </div>
@@ -62,11 +56,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">City</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" name="city">
-                                        <option value="Ankara">Ankara</option>
-                                        <option value="Damascus">Damascus</option>
-                                        <option value="Berlin">Berlin</option>
-                                        <option value="Toronto">Toronto</option>
+                                    <select class="js-example-basic-single w-100" name="city" id="city">
                                     </select>
                                 </div>
                             </div>

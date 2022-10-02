@@ -21,6 +21,8 @@
     <!-- plugins:js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{asset('admin/vendors/js/vendor.bundle.base.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('admin/vendors/select2/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
     <!-- endinject -->
     <!-- inject:css -->
     <link rel="stylesheet" href="{{asset('admin/css/style.css')}}">
@@ -197,6 +199,53 @@
     <!-- page-body-wrapper ends -->
 </div>
 <!-- container-scroller -->
+<!-- Countries/cities -->
+<script type="text/javascript">
+    let apiUrl = "https://laravel-world.com/api/countries";
+    let options;
+    //Load the Countries in the dropbox.
+    $(document).ready(function () {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                var data = JSON.parse(this.responseText).data;
+                data.forEach(createDropbox);
+                document.getElementById("country").innerHTML = options;
+            }
+        };
+        xhttp.open("get", apiUrl);
+        xhttp.send();
+
+        //load the cities on country field change.
+        $('#country').change(function () {
+            if ($(this).val() !== '') {
+                options = [];
+                var countryId = $(this).val();
+                setCities(countryId);
+            } else {
+                $('#city').html('<option value="">Select</option>');
+            }
+        });
+
+        function setCities(id) {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    var cities = JSON.parse(this.responseText).data[0].states;
+                    cities.forEach(createDropbox);
+                    document.getElementById("city").innerHTML = options;
+                }
+            };
+            xhttp.open("get", apiUrl + "?fields=states&filters[id]=" + id);
+            xhttp.send();
+        }
+
+        function createDropbox(item) {
+            options += '<option value="' + item.id + '">' + item.name + '</option>'
+        }
+    });
+</script>
+<!-- Countries/cities -->
 
 <!-- Plugin js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
@@ -221,7 +270,10 @@
 <script src="{{asset('admin/js/hoverable-collapse.js')}}"></script>
 <script src="{{asset('admin/js/template.js')}}"></script>
 <script src="{{asset('admin/js/settings.js')}}"></script>
+<script src="{{asset('admin/vendors/select2/select2.min.js')}}"></script>
 <script src="{{asset('admin/js/todolist.js')}}"></script>
+<script src="{{asset('admin/js/select2.js')}}"></script>
+
 <!-- endinject -->
 <!-- Custom js for this page-->
 <script src="{{asset('admin/js/dashboard.js')}}"></script>
