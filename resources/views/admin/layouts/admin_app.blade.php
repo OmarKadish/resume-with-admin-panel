@@ -202,7 +202,7 @@
 <!-- Countries/cities -->
 <script type="text/javascript">
     let apiUrl = "https://laravel-world.com/api/countries";
-    let options;
+    let options = '<option value="">Select</option>';
     //Load the Countries in the dropbox.
     $(document).ready(function () {
         const xhttp = new XMLHttpRequest();
@@ -272,14 +272,13 @@
 <script src="{{asset('admin/js/settings.js')}}"></script>
 <script src="{{asset('admin/vendors/select2/select2.min.js')}}"></script>
 <script src="{{asset('admin/js/todolist.js')}}"></script>
+<script src="{{asset('admin/js/file-upload.js')}}"></script>
 <script src="{{asset('admin/js/select2.js')}}"></script>
 
-<!-- endinject -->
-<!-- Custom js for this page-->
 <script src="{{asset('admin/js/dashboard.js')}}"></script>
-<script src="{{asset('admin/js/file-upload.js')}}"></script>
 <script src="{{asset('admin/js/Chart.roundedBarCharts.js')}}"></script>
-<!-- End custom js for this page-->
+
+<!-- endinject -->
 </body>
 
 </html>

@@ -57,7 +57,7 @@
                     <div class="resume-content mr-auto">
                         <h3 class="mb-0">{{$exp->section->title}}</h3>
                         <div class="subheading mb-3">{{$exp->companyName}}</div>
-                        <p>{{$exp->section->details}}</p>
+                        <p>{!!$exp->section->details!!}</p>
                     </div>
                     <div class="resume-date text-md-right">
                         <span
@@ -78,7 +78,7 @@
                         <h3 class="mb-0">{{$edu->collageName}}</h3>
                         <div class="subheading mb-3">{{$edu->degree}}<b> in </b>{{$edu->department}}</div>
                         <p>GPA: {{$edu->gpa}}</p>
-                        <div>{{$edu->section->details}}</div>
+                        <div>{!!$edu->section->details!!}</div>
                     </div>
                     <div class="resume-date text-md-right">
                         <span class="text-primary">{{date('M Y', strtotime($edu->section->startDate))}} - {{($edu->section->isActive)? 'Present': date('M Y', strtotime($edu->section->endDate))}}</span>
@@ -91,34 +91,14 @@
     <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
         <div class="my-auto">
             <h2 class="mb-5">Skills</h2>
-
-            <div class="subheading mb-3">Programming Languages &amp; Tools</div>
-            <ul class="list-inline list-icons">
+            <div class="subheading mb-3">Programming Languages, Frameworks &amp; Tools</div>
+            <ul class="fa-ul mb-0">
                 @foreach($user->activeSkills as $skill)
-                    <li class="list-inline-item">
-                        <i class="small devicons" style="font-size: xx-large">{{str_replace(' ', '', $skill->name)}}</i>
+                    <li>
+                        <i class="fa-li fa fa-check"></i>
+                        {{$skill->name}}
                     </li>
                 @endforeach
-            </ul>
-
-            <div class="subheading mb-3">Workflow</div>
-            <ul class="fa-ul mb-0">
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Mobile-First, Responsive Design
-                </li>
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Cross Browser Testing &amp; Debugging
-                </li>
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Cross Functional Teams
-                </li>
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Agile Development &amp; Scrum
-                </li>
             </ul>
         </div>
     </section>

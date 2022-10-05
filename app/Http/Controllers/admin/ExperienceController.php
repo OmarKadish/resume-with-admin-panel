@@ -53,7 +53,7 @@ class ExperienceController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:30',
-            'details' => 'required|max:30',
+            'details' => 'required',
             'country' => 'required',
             //'city' => ['required',Rule::exists('classrooms', 'id')],
             'startDate' => 'required|date',
@@ -117,7 +117,7 @@ class ExperienceController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:30',
-            'details' => 'required|max:30',
+            'details' => 'required',
             'country' => 'required',
             //'city' => ['required',Rule::exists('classrooms', 'id')],
             'startDate' => 'required|date',

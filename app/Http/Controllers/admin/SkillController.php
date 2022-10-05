@@ -51,7 +51,6 @@ class SkillController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:30',
-            'description' => 'required|max:30',
         ]);
         try {
             // Safely perform set of DB related queries if fail rollback all.
@@ -99,7 +98,6 @@ class SkillController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:30',
-            'description' => 'required|max:30',
         ]);
         try {
             // Safely perform set of DB related queries if fail rollback all.

@@ -23,27 +23,30 @@ class DatabaseSeeder extends Seeder
         User::factory()->create();
         Education::factory()->make();
         Experience::factory()->make();
-        Skill::insert(
-            [
+        Skill::insert([
                 'name' => 'PHP',
                 'description' => 'Programming Language.',
                 'isShown' => 1,
                 'user_id' => 1
-            ]);
-        Skill::insert(
-            [
+        ]);
+        Skill::insert([
                 'name' => 'C#',
                 'description' => 'Programming Language.',
                 'isShown' => 0,
                 'user_id' => 1
-            ]);
-        Skill::insert(
-            [
+        ]);
+        Skill::insert([
                 'name' => 'Visual Studio',
                 'description' => 'Programming IDE.',
                 'isShown' => 1,
                 'user_id' => 1
-            ]);
+        ]);
+        Skill::insert([
+                'name' => 'Agile Development &amp; Scrum',
+                'description' => 'Programming Method.',
+                'isShown' => 1,
+                'user_id' => 1
+        ]);
         // \App\Models\User::factory(10)->create();
 
 //         \App\Models\User::factory()->create([

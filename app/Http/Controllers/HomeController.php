@@ -20,10 +20,10 @@ class HomeController extends Controller
     {
         $user = User::with('activeSkills')->first();
         $experiences = Experience::with('section')->whereHas('section', function ($e) use ($user) {
-            return $e->where('user_id',  $user->id);
+            return $e->where([['user_id',  $user->id],['isShown', 1]]);
         })->orderByDesc('created_at')->get();
         $education = Education::with('section')->whereHas('section', function ($e) use ($user) {
-            return $e->where('user_id',  $user->id);
+            return $e->where([['user_id',  $user->id],['isShown', 1]]);
         })->orderByDesc('created_at')->get();
         return view('home', compact('user', 'experiences', 'education'));
     }

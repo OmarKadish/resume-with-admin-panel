@@ -44,14 +44,12 @@
                             </div>
                         </div>
                     </div>
-                    {{--                    Todo: use an Api to provide countries and cities.--}}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Country</label>
                                 <div class="col-sm-9">
                                     <select class="js-example-basic-single w-100" name="country" id="country">
-                                        {{--                                    <select class="form-control" name="country" id="country">--}}
                                     </select>
                                 </div>
                             </div>
@@ -72,10 +70,10 @@
                                 <label class="col-sm-3 col-form-label">Degree</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" name="degree">
-                                        <option value="Associate">Associate</option>
-                                        <option value="Bachelor">Bachelor's</option>
-                                        <option value="Master">Master's</option>
-                                        <option value="Doctoral">Doctoral</option>
+                                        <option value="Associate Degree">Associate</option>
+                                        <option value="Bachelor Degree">Bachelor's</option>
+                                        <option value="Master Degree">Master's</option>
+                                        <option value="Doctoral Degree">Doctoral</option>
                                     </select>
                                 </div>
                             </div>
@@ -132,21 +130,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Details</label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="details"
-                                           value="{{isset($education)? $education->section->details : old('details')}}"
-                                           class="form-control"/>
-                                    @if ($errors->has('details'))
-                                        <div class="alert alert-danger">
-                                            <li>{{ $errors->first('details') }}</li>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">GPA</label>
                                 <div class="col-sm-9">
                                     <input type="decimal" name="gpa"
@@ -160,8 +143,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Status</label>
@@ -184,6 +165,23 @@
                                             Show?
                                         </label>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-sm-1 col-form-label">Details</label>
+                                <div class="col-sm-11">
+                                    <input type="text" id="myTextarea" name="details"
+                                           value="{{isset($education)? $education->section->details : old('details')}}"
+                                           class="form-control"/>
+                                    @if ($errors->has('details'))
+                                        <div class="alert alert-danger">
+                                            <li>{{ $errors->first('details') }}</li>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

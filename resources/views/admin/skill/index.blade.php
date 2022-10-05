@@ -79,14 +79,7 @@
                                 </select>
                             </div>
                         </div>
-                        {{--                        <div class="form-group row">
-                                                    <div class="form-check form-check-primary" style="margin-left: 30%;">
-                                                        <label class=" form-check-label">
-                                                            <input type="checkbox" value="0" class="form-check-input">
-                                                            Shown?
-                                                        </label>
-                                                    </div>
-                                                </div>--}}
+                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                         <button type="submit" id="submitBtn" class="btn btn-primary mr-2">Add</button>
                         <input type="reset" class="btn btn-light" value="Clear">
                     </form>

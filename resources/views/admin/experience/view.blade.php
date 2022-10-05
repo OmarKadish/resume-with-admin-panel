@@ -97,21 +97,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Details</label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="details"
-                                           value="{{isset($experience)? $experience->section->details : old('details')}}"
-                                           class="form-control"/>
-                                    @if ($errors->has('details'))
-                                        <div class="alert alert-danger">
-                                            <li>{{ $errors->first('details') }}</li>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Status</label>
                                 <div class="col-sm-4">
                                     <div class="form-check">
@@ -132,6 +117,23 @@
                                             Show?
                                         </label>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-sm-1 col-form-label" for="details">Details</label>
+                                <div class="col-sm-11">
+                                    <input type="text" id="myTextarea" name="details"
+                                           value="{{isset($experience)? $experience->section->details : old('details')}}"
+                                           class="form-control"/>
+                                    @if ($errors->has('details'))
+                                        <div class="alert alert-danger">
+                                            <li>{{ $errors->first('details') }}</li>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
