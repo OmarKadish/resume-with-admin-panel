@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SectionAddUpdateRequest;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Section;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -46,20 +50,11 @@ class ExperienceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param SectionAddUpdateRequest $request
+     * @return Application|RedirectResponse|Redirector
      */
-    public function store(Request $request)
+    public function store(SectionAddUpdateRequest $request)
     {
-        $this->validate($request, [
-            'title' => 'required|max:30',
-            'details' => 'required',
-            'country' => 'required',
-            //'city' => ['required',Rule::exists('classrooms', 'id')],
-            'startDate' => 'required|date',
-            'endDate' => 'after:startDate',
-            'companyName' => 'required|max:100',
-        ]);
         try {
             // Safely perform set of DB related queries if fail rollback all.
             DB::transaction(function () use ($request){
@@ -109,21 +104,12 @@ class ExperienceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param SectionAddUpdateRequest $request
+     * @param int $id
+     * @return Application|RedirectResponse|Redirector
      */
-    public function update(Request $request, int $id)
+    public function update(SectionAddUpdateRequest $request, int $id)
     {
-        $this->validate($request, [
-            'title' => 'required|max:30',
-            'details' => 'required',
-            'country' => 'required',
-            //'city' => ['required',Rule::exists('classrooms', 'id')],
-            'startDate' => 'required|date',
-            'endDate' => 'after:startDate|before:today',
-            'companyName' => 'required|max:150',
-        ]);
         try {
             DB::transaction(function () use ($request, $id){
                 $experience = Experience::findOrFail($id);

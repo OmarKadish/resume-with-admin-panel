@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -88,24 +92,13 @@ class AdminController extends Controller
     /**
      * Update Profile.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param ProfileUpdateRequest $request
      * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return Application|RedirectResponse|Redirector
      */
-    public function updateProfile(Request $request, $id)
+    public function updateProfile(ProfileUpdateRequest $request, $id)
     {
-        $user = User::find($id);
-        $this->validate($request, [
-            'firstName' => 'required|max:30',
-            'lastName' => 'required|max:30',
-            'phone_number' => 'regex:/(\d+-)?\d{3}-\d{3}-\d{4}$/',
-//            'address' => 'required|max:200',
-//            'summery' => 'after:startDate',
-            'linkedin' => 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
-            'instagram' => 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
-            'github' => 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
-            'photo' => 'mimes:jpeg,bmp,png,jpg|max:2048',
-        ]);
+        $user = User::findOrFail($id);
         try {
             DB::transaction(function () use ($request, $user) {
                 if ($request->hasFile('photo')) {

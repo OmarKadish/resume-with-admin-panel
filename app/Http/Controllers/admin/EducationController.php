@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EduAddUpdateRequest;
+use App\Http\Requests\SectionAddUpdateRequest;
 use App\Models\Education;
 use App\Models\Section;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Validator;
@@ -48,23 +53,11 @@ class EducationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param SectionAddUpdateRequest $request
+     * @return Application|RedirectResponse|Redirector
      */
-    public function store(Request $request)
+    public function store(SectionAddUpdateRequest $request)
     {
-        $this->validate($request, [
-            'title' => 'required|max:30',
-            'details' => 'required',
-            'country' => 'required',
-            //'city' => ['required',Rule::exists('classrooms', 'id')],
-            'startDate' => 'required|date',
-            'endDate' => 'after:startDate',
-            'collageName' => 'required|max:100',
-            'degree' => 'required|max:100',
-            'department' => 'required|max:100',
-            'gpa' => 'required',
-        ]);
         try {
             // Safely perform set of DB related queries if fail rollback all.
             DB::transaction(function () use ($request){
@@ -130,24 +123,12 @@ class EducationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param SectionAddUpdateRequest $request
+     * @param int $id
+     * @return Application|RedirectResponse|Redirector
      */
-    public function update(Request $request, int $id)
+    public function update(SectionAddUpdateRequest $request, int $id)
     {
-        $this->validate($request, [
-            'title' => 'required|max:30',
-            'details' => 'required',
-            'country' => 'required',
-            //'city' => ['required',Rule::exists('classrooms', 'id')],
-            'startDate' => 'required|date',
-            'endDate' => 'after:startDate',
-            'collageName' => 'required|max:100',
-            'degree' => 'required|max:100',
-            'department' => 'required|max:100',
-            'gpa' => 'required',
-        ]);
         try {
             DB::transaction(function () use ($request, $id){
                 $education = Education::findOrFail($id);
@@ -181,7 +162,7 @@ class EducationController extends Controller
     public function destroy(int $id)
     {
         try {
-            $education =Education::with('section')->find($id);
+            $education =Education::with('section')->findOrFail($id);
             $education->section()->delete();
             $education->delete();
 //            Education::destroy($id);

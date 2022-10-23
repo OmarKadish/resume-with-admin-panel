@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SkillAddUpdateRequest;
 use App\Models\Skill;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -44,14 +48,11 @@ class SkillController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param SkillAddUpdateRequest $request
+     * @return Application|RedirectResponse|Redirector
      */
-    public function store(Request $request)
+    public function store(SkillAddUpdateRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:30',
-        ]);
         try {
             // Safely perform set of DB related queries if fail rollback all.
             DB::transaction(function () use ($request){
@@ -90,19 +91,15 @@ class SkillController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param SkillAddUpdateRequest $request
+     * @param int $id
+     * @return Application|RedirectResponse|Redirector
      */
-    public function update(Request $request, int $id)
+    public function update(SkillAddUpdateRequest $request, int $id)
     {
-        $this->validate($request, [
-            'name' => 'required|max:30',
-        ]);
         try {
             // Safely perform set of DB related queries if fail rollback all.
             DB::transaction(function () use ($request, $id){
-
                 $skill = Skill::findOrFail($id);
                 $skill->name = $request->name;
                 $skill->description = $request->description;
