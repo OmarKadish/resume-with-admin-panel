@@ -19,7 +19,7 @@ class Education extends Section
 
     public function section()
     {
-        return $this->belongsTo('App\Models\Section', 'section_id');
+        return $this->belongsTo(Section::class, 'section_id');
     }
 
 }

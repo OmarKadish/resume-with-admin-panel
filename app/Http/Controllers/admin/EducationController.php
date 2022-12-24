@@ -35,7 +35,9 @@ class EducationController extends Controller
      */
     public function index()
     {
-        $eduSections = Education::with('section')->Paginate(10);
+        $eduSections = Education::with('section')->Paginate(10)->sortByDesc(function($item) {
+            return $item->section->endDate;
+        });
         //dd($eduSections);
         return view('admin.education.index',compact('eduSections'));
     }
@@ -182,10 +184,10 @@ class EducationController extends Controller
     {
         $section->title = $request->title;
         $section->details = $request->details;
-        $section->country = $request->country;
-        $section->city = $request->city;
+        $section->country = $request->selectedCountry;
+        $section->city = $request->selectedCity;
         $section->startDate = $request->startDate;
-        $section->endDate = $request->endDate;
+        $section->endDate = $request->endDate?? date('Y-m-d'); //
         $section->isActive = isset($request->isActive) ? 1 : 0;
         $section->isShown = isset($request->isShown) ? 1 : 0;
     }

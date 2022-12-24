@@ -51,6 +51,8 @@
                                 <div class="col-sm-9">
                                     <select class="js-example-basic-single w-100" name="country" id="country">
                                     </select>
+                                    <input type="hidden" id="selectedCountry" name="selectedCountry"
+                                           value="{{isset($education)? $education->section->country : old('country')}}"/>
                                 </div>
                             </div>
                         </div>
@@ -60,6 +62,8 @@
                                 <div class="col-sm-9">
                                     <select class="js-example-basic-single w-100" name="city" id="city">
                                     </select>
+                                    <input type="hidden" value="{{isset($education)? $education->section->city : old('city')}}"
+                                           id="selectedCity" name="selectedCity" />
                                 </div>
                             </div>
                         </div>
