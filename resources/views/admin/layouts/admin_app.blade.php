@@ -203,14 +203,18 @@
 <script type="text/javascript">
     let apiUrl = "https://laravel-world.com/api/countries";
     let options = '<option value="">Select</option>';
+    let currentCountry = document.getElementById('selectedCountry').value;
+    //let currentCity = document.getElementById('selectedCity').value;
     //Load the Countries in the dropbox.
     $(document).ready(function () {
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 var data = JSON.parse(this.responseText).data;
-                data.forEach(createDropbox);
+                data.forEach(createDropbox, currentCountry);
                 document.getElementById("country").innerHTML = options;
+                if(currentCountry) // if updating? fill cities dropbox and select the current city.
+                    setCities($('#country').val());
             }
         };
         xhttp.open("get", apiUrl);
@@ -221,10 +225,18 @@
             if ($(this).val() !== '') {
                 options = [];
                 var countryId = $(this).val();
+                // save the country name in a hidden input to use in inserting to DB.
+                document.getElementById("selectedCountry").value = $('#country').find(":selected").text();
+
                 setCities(countryId);
             } else {
                 $('#city').html('<option value="">Select</option>');
             }
+        });
+
+        // save the city name in a hidden input to use in inserting to DB.
+        $('#city').change(function () {
+            document.getElementById("selectedCity").value = $('#city').find(":selected").text();
         });
 
         function setCities(id) {
@@ -232,7 +244,7 @@
             xhttp.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     var cities = JSON.parse(this.responseText).data[0].states;
-                    cities.forEach(createDropbox);
+                    cities.forEach(createDropbox, document.getElementById('selectedCity').value);
                     document.getElementById("city").innerHTML = options;
                 }
             };
@@ -241,7 +253,10 @@
         }
 
         function createDropbox(item) {
-            options += '<option value="' + item.id + '">' + item.name + '</option>'
+            if(this.valueOf() == item.name)
+                options += '<option selected value="' + item.id + '">' + item.name + '</option>'
+            else
+                options += '<option value="' + item.id + '">' + item.name + '</option>'
         }
     });
 </script>

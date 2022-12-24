@@ -33,7 +33,13 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        $expSections = Experience::with('section')->paginate(10);
+        $expSections = Experience::with('section')->paginate(10)->sortByDesc(function($item) {
+            return $item->section->endDate;
+        });
+        //dd($expSections);
+//        $expSections = Experience::with(['section' => function ($q) {
+//            $q->orderBy('startDate');
+//        }])->paginate(10);
         return view('admin.experience.index', compact('expSections'));
     }
 
@@ -158,10 +164,10 @@ class ExperienceController extends Controller
     {
         $section->title = $request->title;
         $section->details = $request->details;
-        $section->country = $request->country;
-        $section->city = $request->city;
+        $section->country = $request->selectedCountry;
+        $section->city = $request->selectedCity;
         $section->startDate = $request->startDate;
-        $section->endDate = $request->endDate;
+        $section->endDate = $request->endDate?? date('Y-m-d'); //
         $section->isActive = isset($request->isActive) ? 1 : 0;
         $section->isShown = isset($request->isShown) ? 1 : 0;
     }

@@ -49,6 +49,8 @@
                                 <div class="col-sm-9">
                                     <select class="js-example-basic-single w-100" name="country" id="country">
                                     </select>
+                                    <input type="hidden" id="selectedCountry" name="selectedCountry"
+                                           value="{{isset($experience)? $experience->section->country : old('country')}}"/>
                                 </div>
                             </div>
                         </div>
@@ -58,6 +60,7 @@
                                 <div class="col-sm-9">
                                     <select class="js-example-basic-single w-100" name="city" id="city">
                                     </select>
+                                    <input type="hidden" value="{{isset($experience)? $experience->section->city : old('city')}}" id="selectedCity" name="selectedCity" />
                                 </div>
                             </div>
                         </div>
@@ -84,7 +87,7 @@
                                 <div class="col-sm-9">
                                     <input type="date" class="form-control" name="endDate" id="endDate"
                                            value="{{isset($experience)? $experience->section->endDate : old('endDate')}}"
-                                           placeholder="dd/mm/yyyy"/>
+                                           placeholder="dd/mm/yyyy" />
                                     @if ($errors->has('endDate'))
                                         <div class="alert alert-danger">
                                             <li>{{ $errors->first('endDate') }}</li>
@@ -146,9 +149,9 @@
     </div>
     <script type="text/javascript">
         function check() {
-            var element = document.getElementById('endDate');
+            let element = document.getElementById('endDate');
+            //element.value = new Date().toISOString().slice(0, 10);
             element.disabled = document.getElementById('activeCheckBox').checked;
-            element.value = null;
         }
     </script>
 @endsection
